@@ -1,0 +1,25 @@
+# Function to change git branch interactively
+change_git_branch() {
+  # Get the list of branches
+  branches=$(git branch --all | sed 's/^[* ]*//')
+
+  # Use fzf to select a branch interactively
+  selected_branch=$(echo "$branches" | fzf --height 20% --border --ansi --preview 'git log --oneline --color=always {}' --preview-window=down:5:wrap)
+
+  # Check if a branch was selected
+  if [-n "$selected_branch" ]; then
+    # Revoe the remote prefix if present
+    selected_branch=$(echo "$selected_branch" | sed 's#remotes/origin/##')
+
+    # Checkout the selected branch
+    git checkout "$selected_branch"
+
+    # Refresh the prompt to show the new branch
+    set_git_prompt
+  else
+    echo "No branch was selected."
+  fi
+}
+
+# Alias to start the interactive branch switching
+alias checkout='change_git_branch'
