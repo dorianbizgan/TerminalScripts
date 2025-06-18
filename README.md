@@ -5,6 +5,11 @@
 ##### 2. Show Active Branch In zShell
 
 ---
+### Pre-requisites
+##### For 1. Change Git Branch Internactively
+###### - `brew install fzf`
+
+---
 ### Set Up
 ##### 1. Copy the script from the file
 ##### 2. Go to the `Terminal App` and open a new window 
